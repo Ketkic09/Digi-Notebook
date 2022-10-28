@@ -8,7 +8,7 @@ const fetchuser = require('../midleware/fetchuser')
 
 const JWT_SECRET = "thi$ismy@pi"
 
-// POST:/api/auth/createuser This creates a user
+// ROUTE1: POST:/api/auth/createuser This creates a user
 router.post('/createuser',
         [body('email','enter a valid email').isEmail(),
         body('name','enter your name').isLength({min:1}),
@@ -55,7 +55,7 @@ router.post('/createuser',
               
         })
 
-//authentication(login) of user
+//ROUTE 2: POST /api/auth/login authentication(login) of user
 router.post('/login',
             [body('email','enter a valid email').isEmail(),body('password','password incorrect').isLength({min:8})],
             async (req,res)=> {
