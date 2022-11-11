@@ -20,3 +20,17 @@
           </div>
         </div>
       </div>
+
+ketki3@gmail.com
+ketki312345
+
+
+if(localStorage.getItem('token')){
+  fetchNotes(); 
+}
+else{
+  console.log("useeffect else")
+  navigate("http://localhost:3000/login")
+  setNote([])
+}
+// eslint-disable-next-line

@@ -15,7 +15,7 @@ const NoteState = (props)=>{
           method: 'GET', 
           headers: {
             'Content-Type': 'application/json',
-            'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1MzBiYTI5ZGQ1YzJiZjdhNTY1NmIwIn0sImlhdCI6MTY2NzM4MjMxOH0.VS8MhPFVCg_Q0RpprEWxKB7nPRd2QaXC50o0hduWbwE'
+            'auth-token': localStorage.getItem('token')
           },
           body: JSON.stringify() 
         });
@@ -33,23 +33,14 @@ const NoteState = (props)=>{
           method: 'POST', 
           headers: {
             'Content-Type': 'application/json',
-            'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1MzBiYTI5ZGQ1YzJiZjdhNTY1NmIwIn0sImlhdCI6MTY2NzM4MjMxOH0.VS8MhPFVCg_Q0RpprEWxKB7nPRd2QaXC50o0hduWbwE'
+            'auth-token': localStorage.getItem('token')
           },
           body: JSON.stringify({title,description,tags}) 
           
         });
-        console.log(response)
-        
-        const note = {
-            "_id": "635ad16517252370ee6217d700",
-            "user": "63530ba29dd5c2bf7a5656b00",
-            "title": title,
-            "description": description,
-            "tags": tags,
-            "date": "2022-10-27T18:43:49.914Z",
-            "__v": 0
-        }
+        const note = await response.json()
         setNotes(notes.concat(note))
+        console.log(response)
     }
 
     //EDIT  note
@@ -59,7 +50,7 @@ const NoteState = (props)=>{
         method: 'PUT', 
         headers: {
           'Content-Type': 'application/json',
-          'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1MzBiYTI5ZGQ1YzJiZjdhNTY1NmIwIn0sImlhdCI6MTY2NzM4MjMxOH0.VS8MhPFVCg_Q0RpprEWxKB7nPRd2QaXC50o0hduWbwE'
+          'auth-token':localStorage.getItem('token')
         },
         body: JSON.stringify({title,description,tags}) 
       });
@@ -91,7 +82,7 @@ const NoteState = (props)=>{
         method: 'DELETE', 
         headers: {
           'Content-Type': 'application/json',
-          'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM1MzBiYTI5ZGQ1YzJiZjdhNTY1NmIwIn0sImlhdCI6MTY2NzM4MjMxOH0.VS8MhPFVCg_Q0RpprEWxKB7nPRd2QaXC50o0hduWbwE'
+          'auth-token':localStorage.getItem('token')
         },
         
       });

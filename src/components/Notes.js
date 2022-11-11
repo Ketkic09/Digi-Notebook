@@ -4,17 +4,25 @@ import { AddNote } from "./AddNote";
 import Noteitems from "./Noteitems";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {useNavigate} from 'react-router-dom'
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(NoteContext);
   const { notes, fetchNotes,editNote } = context;
   const [note,setNote] = useState({id:'',etitle:'',edescription:'',etags:''})
+  let navigate = useNavigate()
 
   //Fetching all notes
   useEffect(() => {
-    fetchNotes(); 
-    // eslint-disable-next-line
-  }, []);
+    if(localStorage.getItem('token')){
+      fetchNotes(); 
+    }
+    else{
+      console.log("useeffect else")
+      navigate("/login")
+      setNote([])
+    }
+},[])
 
   //Lanching Edit Modal of specfic note
   const ref = useRef(null);
@@ -39,14 +47,17 @@ const Notes = () => {
     e.preventDefault()
     editNote(note.id,note.etitle,note.edescription,note.etags)
     console.log("Edited!",note)
-    setShow(false)  
- 
+    setShow(false)
+    props.showAlert("Edited successfully!","success")  
   }
 
   return (
     <>
-      <AddNote /> 
-      
+      <AddNote showAlert={props.showAlert} />
+      <h2>Your Notes</h2>
+      <div className="d-flex justify-content-center">
+      {notes.length === 0 && <p className="text-muted">No notes added</p>}
+      </div>
       <Button variant="primary" ref={ref} onClick={handleShow} className="d-none">
         launch edit 
       </Button>
@@ -73,8 +84,10 @@ const Notes = () => {
                 id="etitle"
                 placeholder="add your note title"
                 name='etitle'
+                minLength={2}
                 value={note.etitle}
                 onChange={onChange}
+                required
               />
             </div>
             <div className="mb-3">
@@ -87,8 +100,10 @@ const Notes = () => {
                 rows="3"
                 name='edescription'
                 placeholder='add a description'
+                minLength={5}
                 value={note.edescription}
                 onChange={onChange}
+                required
               ></textarea>
             </div>
             <div className="mb-3">
@@ -101,6 +116,7 @@ const Notes = () => {
                 id="etags"
                 placeholder="add your note title"
                 name='etags'
+                minLength={2}
                 value={note.etags}
                 onChange={onChange}
               />
@@ -111,15 +127,17 @@ const Notes = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleEdit}>Save Edits</Button>
+          <Button variant="primary" onClick={handleEdit} disabled={note.etitle.length<2 || note.edescription.length<5}>Save Edits</Button>
         </Modal.Footer>
       </Modal>
       
       <div className="row my-4">
-        <h2>Your Notes</h2>
+       
         {notes.map((note) => {
+          
           return (
-            <Noteitems key={note._id} note={note} updateNote={updateNote} />
+          
+            <Noteitems key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert}/>
           );
         })}
       </div>

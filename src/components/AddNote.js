@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react'
 import NoteContext from "../context/notes/noteContext";
 
-export const AddNote = () => {
+export const AddNote = (props) => {
     const context = useContext(NoteContext)
     const {addNote} = context
-    const [note,setNote] = useState({title:'',description:'',tags:'default'})
+    const [note,setNote] = useState({title:'',description:'',tags:''})
 
     const handleAdd = (e)=>{
         e.preventDefault()
         addNote(note.title,note.description,note.tags);
+        setNote({title:'',description:'',tags:''})
+        props.showAlert("Note added successfully!","success")
     }
     const onChange = (e)=>{
       setNote({...note,[e.target.name]:e.target.value})
@@ -27,7 +29,10 @@ export const AddNote = () => {
               id="title"
               placeholder="add your note title"
               name='title'
+              value={note.title}
+              minLength={2}
               onChange={onChange}
+              required
             />
           </div>
           <div className="mb-3">
@@ -40,7 +45,10 @@ export const AddNote = () => {
               rows="3"
               name='description'
               placeholder='add a description'
+              value={note.description}
+              minLength={5}
               onChange={onChange}
+              required
             ></textarea>
           </div>
           <div className="mb-3">
@@ -51,12 +59,14 @@ export const AddNote = () => {
               type="text"
               className="form-control"
               id="tags"
-              placeholder="add your note title"
+              placeholder="add tags"
+              value={note.tags}
               name='tags'
+              minLength={2}
               onChange={onChange}
             />
           </div>
-          <button type='submit' className='btn btn-primary' onClick={handleAdd}>Add note</button>
+          <button disabled={note.title.length<2 || note.description.length<5} type='submit' className='btn btn-primary' onClick={handleAdd}>Add note</button>
         </form>
       </div>
   )
