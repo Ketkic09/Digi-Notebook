@@ -20,7 +20,6 @@ const NoteState = (props)=>{
           body: JSON.stringify() 
         });
         const json = await response.json()
-        console.log(json)
         setNotes(json)
 
     }
@@ -40,7 +39,7 @@ const NoteState = (props)=>{
         });
         const note = await response.json()
         setNotes(notes.concat(note))
-        console.log(response)
+
     }
 
     //EDIT  note
@@ -54,15 +53,14 @@ const NoteState = (props)=>{
         },
         body: JSON.stringify({title,description,tags}) 
       });
-      const json = await response.json()
-      console.log(json)
+      await response.json()
+
 
       let newNotes = JSON.parse(JSON.stringify(notes))
       //edit for client side
       for (let index = 0; index < newNotes.length; index++) {
         const element = newNotes[index];
         if(element._id === id){
-          console.log("entered if")
           element.title = title
           element.description = description
           element.tags = tags
@@ -71,12 +69,13 @@ const NoteState = (props)=>{
 
       }
       setNotes(newNotes)
-      console.log(notes)
+
     }
 
     //delete note
     const deleteNote= async(id)=>{
       console.log("deleting note with id"+id)
+
       //API call
       const response = await fetch(`${host}api/notes/deletenote/${id}`, {
         method: 'DELETE', 
@@ -86,8 +85,8 @@ const NoteState = (props)=>{
         },
         
       });
-      const json = await response.json()
-      console.log(json)
+      await response.json()
+
       const deleteList = notes.filter((note)=>{return note._id !== id})
       setNotes(deleteList)
     }

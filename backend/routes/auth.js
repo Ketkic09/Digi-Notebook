@@ -68,6 +68,7 @@ router.post('/login',
                 const {email,password} = req.body
                 try{
                     const user = await User.findOne({email:req.body.email})
+                    const {name} = user
                     if(!user){
                         return res.status(400).json({success,error:"Please try to login with correct credentials"})
                     }
@@ -83,7 +84,7 @@ router.post('/login',
                     }
                     const authToken = jwt.sign(data,JWT_SECRET)
                     success= true
-                    res.json({success,authToken})
+                    res.json({success,authToken,name})
 
                 }catch(error){
 

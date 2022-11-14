@@ -28,7 +28,6 @@ const Notes = (props) => {
   const ref = useRef(null);
 
   const updateNote = (currentNote) => {
-    console.log("update called")
     ref.current.click();
     setNote({id:currentNote._id,etitle:currentNote.title,edescription:currentNote.description,etags:currentNote.tags})
 
@@ -46,15 +45,18 @@ const Notes = (props) => {
   const handleEdit = (e)=>{
     e.preventDefault()
     editNote(note.id,note.etitle,note.edescription,note.etags)
-    console.log("Edited!",note)
+    console.log("Edited!")
     setShow(false)
     props.showAlert("Edited successfully!","success")  
   }
 
   return (
     <>
+      
       <AddNote showAlert={props.showAlert} />
-      <h2>Your Notes</h2>
+      <hr></hr>
+      <h2 className="mt-4">Your Notes</h2>
+     
       <div className="d-flex justify-content-center">
       {notes.length === 0 && <p className="text-muted">No notes added</p>}
       </div>
@@ -131,7 +133,7 @@ const Notes = (props) => {
         </Modal.Footer>
       </Modal>
       
-      <div className="row my-4">
+      <div className="row my-2">
        
         {notes.map((note) => {
           

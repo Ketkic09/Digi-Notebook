@@ -66,7 +66,7 @@ export const AddNote = (props) => {
               onChange={onChange}
             />
           </div>
-          <button disabled={note.title.length<2 || note.description.length<5} type='submit' className='btn btn-primary' onClick={handleAdd}>Add note</button>
+          <button disabled={note.title.length<2 || note.description.length<5} type='submit' className='btn btn-dark' onClick={handleAdd}>Add note</button>
         </form>
       </div>
   )

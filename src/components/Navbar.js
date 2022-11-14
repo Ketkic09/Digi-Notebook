@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
+
 const Navbar = () => {
   const location = useLocation()
   let navigate = useNavigate()
@@ -40,9 +41,9 @@ const Navbar = () => {
               </li>
             </ul>
             {!localStorage.getItem('token') ? <form className="d-flex" >
-              <Link className="btn btn-outline-primary mx-2" to="/login">Login</Link>
-              <Link className="btn btn-primary mx-2" to="/signup">signup</Link>
-            </form>:<button className="btn btn-primary" onClick={handleLogout}>logout</button>}
+              <Link className="btn btn-outline-light mx-2" to="/login">Login</Link>
+              <Link className="btn btn-light mx-2" to="/signup">signup</Link>
+            </form>:<button className="btn btn-light" onClick={handleLogout}>logout</button>}
           </div>
         </div>
       </nav>

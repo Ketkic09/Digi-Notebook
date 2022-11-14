@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
+import bg from './../images/bg.svg'
 
 const Signup = (props) => {
   let navigate = useNavigate()
@@ -34,7 +35,10 @@ const Signup = (props) => {
 
   
   return (
-    <>
+    <> 
+      <div className='d-flex justify-content-between'>
+      <img src={bg} alt="background" className='d-none  d-sm-block'></img>
+      <div className="d-inline-block p-4 bg-dark text-white col-md-6">
       <h2>Signup</h2>
       <form onSubmit={handleSignup}>
       <div className="form-group">
@@ -49,7 +53,7 @@ const Signup = (props) => {
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input type={see? "text":"password"} className="form-control" name="password" onChange={onChange} value={user.password} id="exampleInputPassword1" placeholder="Password"  minLength={8} required/>
-          <i class={see?"fa-solid fa-eye":"fa-solid fa-eye-slash"} onClick={()=>{setSee(!see)}}></i>
+          <i className={see?"fa-solid fa-eye":"fa-solid fa-eye-slash"} onClick={()=>{setSee(!see)}}></i>
           <small id="passwordHelp" className="form-text text-muted mx-2">Your password should atleast have 8 characters</small>
         </div>
         <div className="form-group mt-2">
@@ -57,9 +61,14 @@ const Signup = (props) => {
           <input type="password" className="form-control" name="password2" onChange={onChange} value={user.password2} id="exampleInputPassword2" placeholder="Password" minLength={8} required/>
         </div>
         {user.password.length!==0 || user.password2.length !==0 ? user.password !== user.password2? <small className='text-danger mt-2'>Passwords don't match :(</small>:<small className='text-success mt-2'>Passwords match :)</small>:<small></small>}
+        <button type="submit" className="btn btn-light mt-2" disabled={user.password !== user.password2 || user.name.length<2 }>SignUp</button>
         <br></br>
-        <button type="submit" className="btn btn-primary mt-2" disabled={user.password !== user.password2 || user.name.length<2 }>Submit</button>
+        <small className='text-muted'>Already have an account?</small>&nbsp;
+        <Link to="/login">Login</Link>
       </form>
+      </div>
+      </div>
+      
 
     </>
     
