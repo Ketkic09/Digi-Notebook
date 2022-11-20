@@ -1,7 +1,9 @@
-# DigiNotebook  
-<p>Note down all your ideas,thoughts,plans in one secure place.</p>
+# DigiNotebook
+<strong>Note down all your ideas,thoughts,plans in one secure place.</strong>
 
-A web application built on MERN stack. 
+Just SignUp and get started :)
+
+<strong>A web application built on MERN stack</strong> 
 
 ## :round_pushpin:Functions
 1) Provides secure authentication by encrypting passwords and storing their hash in database. Json Web Tokens are used for safe information transfer.
