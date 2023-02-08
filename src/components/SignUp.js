@@ -37,7 +37,7 @@ const Signup = (props) => {
   return (
     <> 
       <div className='d-flex justify-content-between'>
-      <img src={bg} alt="background" className='d-none  d-sm-block'></img>
+      <img src={bg} alt="background" className='d-none d-sm-block'></img>
       <div className="d-inline-block p-4 bg-dark text-white col-md-6">
       <h2>Signup</h2>
       <form onSubmit={handleSignup}>
@@ -61,6 +61,8 @@ const Signup = (props) => {
           <input type="password" className="form-control" name="password2" onChange={onChange} value={user.password2} id="exampleInputPassword2" placeholder="Password" minLength={8} required/>
         </div>
         {user.password.length!==0 || user.password2.length !==0 ? user.password !== user.password2? <small className='text-danger mt-2'>Passwords don't match :(</small>:<small className='text-success mt-2'>Passwords match :)</small>:<small></small>}
+        <br></br>
+        
         <button type="submit" className="btn btn-light mt-2" disabled={user.password !== user.password2 || user.name.length<2 }>SignUp</button>
         <br></br>
         <small className='text-muted'>Already have an account?</small>&nbsp;

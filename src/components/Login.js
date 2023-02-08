@@ -4,6 +4,7 @@ import bg from './../images/bg.svg'
 
 const Login = (props) => {
     const [user, setUser] = useState({email:"",password:""})
+    const [see,setSee] = useState(false)
     let navigate = useNavigate() 
     const host = 'http://localhost:5000/'
     const onChange=(e)=>{
@@ -41,7 +42,7 @@ const Login = (props) => {
     <>
         <div className='d-flex justify-content-between'>
         
-            <img src={bg} alt="background" height="auto" className='d-none  d-sm-block'></img>
+            <img src={bg} alt="background" height="auto" className='d-none d-sm-block'></img>
             
             <div className="d-inline-block p-4 bg-dark text-white col-md-6">
                 <h2>Login</h2>
@@ -52,7 +53,8 @@ const Login = (props) => {
                 </div>
                 <div className="form-group mt-4">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" value = {user.password} name = "password"className="form-control" id="password" placeholder="Password" onChange={onChange} required />    
+                    <input type={see? "text":"password"} className="form-control" name="password" onChange={onChange} value={user.password} id="exampleInputPassword1" placeholder="Password"  minLength={8} required/>
+                    <i className={see?"fa-solid fa-eye":"fa-solid fa-eye-slash"} onClick={()=>{setSee(!see)}}></i>
                 </div>
                 <button type="submit" className="btn btn-light mt-3" disabled={user.email.length===0 || user.password.length===0}>Login</button>
                 </form>
