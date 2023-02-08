@@ -16,7 +16,7 @@ Just SignUp and get started :)
 
 <h2>Instructions</h2>
 
-Frontend running on [http://localhost:5000](http://localhost:5000)
+Frontend running on [http://localhost:3000](http://localhost:5000)
 
 Backend running on [http://localhost:5000](http://localhost:5000)
 
